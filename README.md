@@ -20,3 +20,6 @@ Original CPython repository: https://github.com/python/cpython
 
 ## Author
 Pranali Debnath
+# PranaliPy
+Customized CPython 3.12 — Bytecode Insight Mode
+ 0671071fcfe8c7c7d2c6faffd5de15034d93f12c
