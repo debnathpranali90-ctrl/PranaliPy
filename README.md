@@ -1,25 +1,72 @@
 # PranaliPy – Bytecode Insight Mode
 
-My customized Python flavour based on CPython 3.12.
+A customised CPython 3.12 flavour created as a Python Flavour assignment.
 
-## Changes Made
-- Modified `Python/bytecodes.c`.
-- Added a diagnostic message in the `BINARY_OP` execution logic.
-- Regenerated `Python/generated_cases.c.h`.
+PranaliPy adds a diagnostic message to the `BINARY_OP` bytecode execution logic. This helps observe an internal part of Python's execution process.
 
-## Diagnostic Message
-`[PranaliPy] Executing BINARY_OP`
+## Project Flow
 
-## Build and Test
-The customized CPython interpreter was built using Visual Studio Build Tools on Windows.
+Python Source Code → Compilation → Bytecode → CPython Evaluation Loop → BINARY_OP → Diagnostic Message → Result
 
-The runtime test produced the correct output: `42`.
+## Customisation
 
-## Source
-Original CPython repository: https://github.com/python/cpython
+File modified: `Python/bytecodes.c`
+
+Added code:
+
+```c
+PySys_WriteStderr("[PranaliPy] Executing BINARY_OP\n");
+```
+
+This message is displayed whenever the interpreter executes the `BINARY_OP` instruction.
+
+## Generated File
+
+`Python/generated_cases.c.h`
+
+This file was regenerated after modifying the bytecode definition.
+
+## Example
+
+```python
+A = type('A', (), {'__add__': lambda self, other: 42})
+print(A() + A())
+```
+
+Output:
+
+```text
+42
+```
+
+PranaliPy also displays its diagnostic message during execution.
+
+## Build
+
+```cmd
+PCbuild\build.bat -p x64
+```
+
+## Test
+
+```cmd
+PCbuild\amd64\python.exe -c "A=type('A',(),{'__add__':lambda self,other:42}); print(A()+A())"
+```
+
+## Learning Outcomes
+
+- Understanding CPython source code
+- Exploring Python bytecode
+- Modifying the interpreter
+- Regenerating source files
+- Building and testing customised CPython
+
+## Original Source
+
+https://github.com/python/cpython
 
 ## Author
-Pranali Debnath
-# PranaliPy
-Customized CPython 3.12 — Bytecode Insight Mode
- 0671071fcfe8c7c7d2c6faffd5de15034d93f12c
+
+Pranali Debnath  
+B.Tech Computer Science and Engineering  
+ICFAI University, Tripura
